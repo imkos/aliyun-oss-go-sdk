@@ -12,7 +12,7 @@ import (
 	"strconv"
 
 	kms "github.com/aliyun/alibaba-cloud-sdk-go/services/kms"
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // MasterCipherManager is interface for getting master key with MatDesc(material desc)
@@ -146,7 +146,8 @@ type CryptoBucket struct {
 
 // GetCryptoBucket create a client encyrption bucket
 func GetCryptoBucket(client *oss.Client, bucketName string, builder ContentCipherBuilder,
-	options ...CryptoBucketOption) (*CryptoBucket, error) {
+	options ...CryptoBucketOption,
+) (*CryptoBucket, error) {
 	var cryptoBucket CryptoBucket
 	cryptoBucket.Client = *client
 	cryptoBucket.BucketName = bucketName
@@ -349,7 +350,8 @@ func (bucket CryptoBucket) DoGetObject(request *oss.GetObjectRequest, options []
 	if err == nil && discardFrontAlignLen > 0 {
 		resp.Body = &oss.DiscardReadCloser{
 			RC:      resp.Body,
-			Discard: int(discardFrontAlignLen)}
+			Discard: int(discardFrontAlignLen),
+		}
 	}
 	return result, err
 }

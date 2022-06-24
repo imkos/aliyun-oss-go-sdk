@@ -16,7 +16,7 @@ import (
 	"time"
 
 	kms "github.com/aliyun/alibaba-cloud-sdk-go/services/kms"
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 	. "gopkg.in/check.v1"
 )
 
@@ -24,8 +24,7 @@ func Test(t *testing.T) {
 	TestingT(t)
 }
 
-type OssCryptoBucketSuite struct {
-}
+type OssCryptoBucketSuite struct{}
 
 var _ = Suite(&OssCryptoBucketSuite{})
 
@@ -94,7 +93,7 @@ var (
 
 var (
 	logPath            = "go_sdk_test_" + time.Now().Format("20060102_150405") + ".log"
-	testLogFile, _     = os.OpenFile(logPath, os.O_RDWR|os.O_CREATE, 0664)
+	testLogFile, _     = os.OpenFile(logPath, os.O_RDWR|os.O_CREATE, 0o664)
 	testLogger         = log.New(testLogFile, "", log.Ldate|log.Ltime|log.Lshortfile)
 	letters            = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	timeoutInOperation = 3 * time.Second
@@ -191,8 +190,10 @@ func ForceDeleteBucket(client *oss.Client, bucketName string, c *C) {
 		lmur, err := bucket.ListMultipartUploads(keyMarker, uploadIDMarker)
 		c.Assert(err, IsNil)
 		for _, upload := range lmur.Uploads {
-			var imur = oss.InitiateMultipartUploadResult{Bucket: bucketName,
-				Key: upload.Key, UploadID: upload.UploadID}
+			imur := oss.InitiateMultipartUploadResult{
+				Bucket: bucketName,
+				Key:    upload.Key, UploadID: upload.UploadID,
+			}
 			err = bucket.AbortMultipartUpload(imur)
 			c.Assert(err, IsNil)
 		}
@@ -249,7 +250,6 @@ func (s *OssCryptoBucketSuite) SetUpTest(c *C) {
 
 // TearDownTest runs once after all tests or benchmarks have finished running
 func (s *OssCryptoBucketSuite) TearDownTest(c *C) {
-
 }
 
 func (s *OssCryptoBucketSuite) TestPutObjectNormalPks8(c *C) {
@@ -594,8 +594,7 @@ func (s *OssCryptoBucketSuite) TestKmsPutObjectNormal(c *C) {
 	ForceDeleteBucket(client, bucketName, c)
 }
 
-type MockKmsManager struct {
-}
+type MockKmsManager struct{}
 
 func (mg *MockKmsManager) GetMasterKey(matDesc map[string]string) ([]string, error) {
 	if len(matDesc) == 0 {
@@ -691,7 +690,7 @@ func (s *OssCryptoBucketSuite) TestRsaBucketDecrptObjectWithKmsError(c *C) {
 	var options []CryptoBucketOption
 
 	// kms client is nil
-	//options = append(options, SetAliKmsClient(kmsClient))
+	// options = append(options, SetAliKmsClient(kmsClient))
 
 	options = append(options, SetMasterCipherManager(&masterManager))
 
@@ -856,8 +855,7 @@ func (s *OssCryptoBucketSuite) TestGetCryptoBucketNotSupport(c *C) {
 	c.Assert(err, NotNil)
 }
 
-type MockRsaManager struct {
-}
+type MockRsaManager struct{}
 
 func (mg *MockRsaManager) GetMasterKey(matDesc map[string]string) ([]string, error) {
 	if len(matDesc) == 0 {
@@ -1154,7 +1152,7 @@ func (s *OssCryptoBucketSuite) TestRepeatedPutObjectFromFile(c *C) {
 
 func (s *OssCryptoBucketSuite) TestPutObjectEncryptionUserAgent(c *C) {
 	logName := "." + string(os.PathSeparator) + "test-go-sdk.log" + RandStr(5)
-	f, err := os.OpenFile(logName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0660)
+	f, err := os.OpenFile(logName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0o660)
 	c.Assert(err, IsNil)
 
 	// create a bucket with default proprety
@@ -1192,7 +1190,7 @@ func (s *OssCryptoBucketSuite) TestPutObjectEncryptionUserAgent(c *C) {
 
 func (s *OssCryptoBucketSuite) TestPutObjectNormalUserAgent(c *C) {
 	logName := "." + string(os.PathSeparator) + "test-go-sdk.log" + RandStr(5)
-	f, err := os.OpenFile(logName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0660)
+	f, err := os.OpenFile(logName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0o660)
 	c.Assert(err, IsNil)
 
 	// create a bucket with default proprety

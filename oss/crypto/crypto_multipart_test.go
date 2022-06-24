@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 	. "gopkg.in/check.v1"
 )
 
@@ -469,7 +469,7 @@ func (s *OssCryptoBucketSuite) TestInitiateMultipartUpload(c *C) {
 	context := RandStr(ivSize * 1024 * 10)
 	fileName := "test-go-sdk-file-" + RandStr(5)
 
-	err = ioutil.WriteFile(fileName, []byte(context), 0666)
+	err = ioutil.WriteFile(fileName, []byte(context), 0o666)
 	c.Assert(err, IsNil)
 
 	fileInfo, err := os.Stat(fileName)
@@ -513,7 +513,7 @@ func (s *OssCryptoBucketSuite) TestUploadPartError(c *C) {
 	context := RandStr(ivSize * 1024 * 10)
 	fileName := "test-go-sdk-file-" + RandStr(5)
 
-	err = ioutil.WriteFile(fileName, []byte(context), 0666)
+	err = ioutil.WriteFile(fileName, []byte(context), 0o666)
 	c.Assert(err, IsNil)
 
 	fileInfo, err := os.Stat(fileName)
@@ -568,7 +568,7 @@ func (s *OssCryptoBucketSuite) TestUploadPartFromFileError(c *C) {
 	context := RandStr(ivSize * 1024 * 10)
 	fileName := "test-go-sdk-file-" + RandStr(5)
 
-	err = ioutil.WriteFile(fileName, []byte(context), 0666)
+	err = ioutil.WriteFile(fileName, []byte(context), 0o666)
 	c.Assert(err, IsNil)
 
 	fileInfo, err := os.Stat(fileName)
@@ -619,7 +619,7 @@ func (s *OssCryptoBucketSuite) TestUploadPartCopyError(c *C) {
 	context := RandStr(ivSize * 1024 * 10)
 	fileName := "test-go-sdk-file-" + RandStr(5)
 
-	err = ioutil.WriteFile(fileName, []byte(context), 0666)
+	err = ioutil.WriteFile(fileName, []byte(context), 0o666)
 	c.Assert(err, IsNil)
 
 	fileInfo, err := os.Stat(fileName)

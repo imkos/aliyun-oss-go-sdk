@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // PartCryptoContext save encryption or decryption information
@@ -65,7 +65,8 @@ func (bucket CryptoBucket) InitiateMultipartUpload(objectKey string, cryptoConte
 // UploadPart uploads parts to oss, the part data are encrypted automaticly on client side
 // cryptoContext is the input parameter
 func (bucket CryptoBucket) UploadPart(imur oss.InitiateMultipartUploadResult, reader io.Reader,
-	partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option) (oss.UploadPart, error) {
+	partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option,
+) (oss.UploadPart, error) {
 	options = bucket.AddEncryptionUaSuffix(options)
 	var uploadPart oss.UploadPart
 	if cryptoContext.ContentCipher == nil {
@@ -114,9 +115,10 @@ func (bucket CryptoBucket) UploadPart(imur oss.InitiateMultipartUploadResult, re
 // UploadPartFromFile uploads part from the file, the part data are encrypted automaticly on client side
 // cryptoContext is the input parameter
 func (bucket CryptoBucket) UploadPartFromFile(imur oss.InitiateMultipartUploadResult, filePath string,
-	startPosition, partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option) (oss.UploadPart, error) {
+	startPosition, partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option,
+) (oss.UploadPart, error) {
 	options = bucket.AddEncryptionUaSuffix(options)
-	var uploadPart = oss.UploadPart{}
+	uploadPart := oss.UploadPart{}
 	if cryptoContext.ContentCipher == nil {
 		return uploadPart, fmt.Errorf("error,cryptoContext is nil or cryptoContext.ContentCipher is nil")
 	}
@@ -168,7 +170,8 @@ func (bucket CryptoBucket) UploadPartFromFile(imur oss.InitiateMultipartUploadRe
 
 // UploadPartCopy uploads part copy
 func (bucket CryptoBucket) UploadPartCopy(imur oss.InitiateMultipartUploadResult, srcBucketName, srcObjectKey string,
-	startPosition, partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option) (oss.UploadPart, error) {
-	var uploadPart = oss.UploadPart{}
+	startPosition, partSize int64, partNumber int, cryptoContext PartCryptoContext, options ...oss.Option,
+) (oss.UploadPart, error) {
+	uploadPart := oss.UploadPart{}
 	return uploadPart, fmt.Errorf("CryptoBucket doesn't support UploadPartCopy")
 }
