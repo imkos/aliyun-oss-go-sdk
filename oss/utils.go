@@ -16,9 +16,11 @@ import (
 	"time"
 )
 
-var sys_name string
-var sys_release string
-var sys_machine string
+var (
+	sys_name    string
+	sys_release string
+	sys_machine string
+)
 
 func init() {
 	sys_name = runtime.GOOS
@@ -225,8 +227,8 @@ func SplitFileByPartNum(fileName string, chunkNum int) ([]FileChunk, error) {
 	}
 
 	var chunks []FileChunk
-	var chunk = FileChunk{}
-	var chunkN = (int64)(chunkNum)
+	chunk := FileChunk{}
+	chunkN := (int64)(chunkNum)
 	for i := int64(0); i < chunkN; i++ {
 		chunk.Number = int(i + 1)
 		chunk.Offset = i * (stat.Size() / chunkN)
@@ -258,13 +260,13 @@ func SplitFileByPartSize(fileName string, chunkSize int64) ([]FileChunk, error) 
 	if err != nil {
 		return nil, err
 	}
-	var chunkN = stat.Size() / chunkSize
+	chunkN := stat.Size() / chunkSize
 	if chunkN >= 10000 {
 		return nil, errors.New("Too many parts, please increase part size")
 	}
 
 	var chunks []FileChunk
-	var chunk = FileChunk{}
+	chunk := FileChunk{}
 	for i := int64(0); i < chunkN; i++ {
 		chunk.Number = int(i + 1)
 		chunk.Offset = i * chunkSize
@@ -456,6 +458,8 @@ func GetReaderLen(reader io.Reader) (int64, error) {
 		contentLength = int64(v.N)
 	case *LimitedReadCloser:
 		contentLength = int64(v.N)
+	case *SReader:
+		contentLength = v.Size
 	default:
 		err = fmt.Errorf("can't get reader content length,unkown reader type")
 	}
