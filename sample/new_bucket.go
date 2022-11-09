@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // NewBucketSample shows how to initialize client and bucket
@@ -28,7 +28,7 @@ func NewBucketSample() {
 	}
 
 	// Put object, uploads an object
-	var objectName = "myobject"
+	objectName := "myobject"
 	err = bucket.PutObject(objectName, strings.NewReader("MyObjectValue"))
 	if err != nil {
 		HandleError(err)

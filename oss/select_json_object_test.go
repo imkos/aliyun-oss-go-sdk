@@ -18,6 +18,7 @@ type OssSelectJsonSuite struct {
 var _ = Suite(&OssSelectJsonSuite{})
 
 func (s *OssSelectJsonSuite) SetUpSuite(c *C) {
+	bucketName := bucketNamePrefix + RandLowStr(6)
 	if cloudboxControlEndpoint == "" {
 		client, err := New(endpoint, accessID, accessKey)
 		c.Assert(err, IsNil)
@@ -128,7 +129,7 @@ func (s *OssSelectJsonSuite) TestSelectJsonDocument(c *C) {
 	c.Assert(err, IsNil)
 	str, err := readJsonDocument("../sample/sample_json.json")
 	c.Assert(err, IsNil)
-	c.Assert(string(p)+string(p1)+string(rets), Equals, str)
+	c.Assert(string(p)+string(p1)+string(rets), Equals, escaped_slashs(str))
 
 	err = s.bucket.DeleteObject(key)
 	c.Assert(err, IsNil)
@@ -154,7 +155,7 @@ func (s *OssSelectJsonSuite) TestSelectJsonLines(c *C) {
 	rets, err := ioutil.ReadAll(body)
 	c.Assert(err, IsNil)
 	str, err := readJsonDocument("../sample/sample_json.json")
-	c.Assert(string(rets), Equals, str)
+	c.Assert(string(rets), Equals, escaped_slashs(str))
 
 	err = s.bucket.DeleteObject(key)
 	c.Assert(err, IsNil)
@@ -292,7 +293,7 @@ func (s *OssSelectJsonSuite) TestSelectJsonLinesRange(c *C) {
 	rets, err := ioutil.ReadAll(body)
 	c.Assert(err, IsNil)
 	str, err := readJsonLinesRange("../sample/sample_json.json", 0, 2)
-	c.Assert(string(rets), Equals, str)
+	c.Assert(string(rets), Equals, escaped_slashs(str))
 
 	err = s.bucket.DeleteObject(key)
 	c.Assert(err, IsNil)
@@ -401,7 +402,7 @@ func (s *OssSelectJsonSuite) TestSelectJsonDocumentConcat(c *C) {
 	c.Assert(err, IsNil)
 	str, err := readJsonDocumentConcat("../sample/sample_json.json")
 	c.Assert(err, IsNil)
-	c.Assert(string(rets), Equals, str)
+	c.Assert(string(rets), Equals, escaped_slashs(str))
 
 	err = s.bucket.DeleteObject(key)
 	c.Assert(err, IsNil)
@@ -508,4 +509,8 @@ func (s *OssSelectJsonSuite) TestSelectJsonParseNumAsString(c *C) {
 
 	err = s.bucket.DeleteObject(key)
 	c.Assert(err, IsNil)
+}
+
+func escaped_slashs(value string) string {
+	return strings.Replace(value, "/", "\\/", -1)
 }

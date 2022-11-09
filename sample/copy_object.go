@@ -3,7 +3,7 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // CopyObjectSample shows the copy files usage
@@ -21,7 +21,7 @@ func CopyObjectSample() {
 	}
 
 	// Case 1: Copy an existing object
-	var descObjectKey = "descobject"
+	descObjectKey := "descobject"
 	_, err = bucket.CopyObject(objectKey, descObjectKey)
 	if err != nil {
 		HandleError(err)
@@ -55,7 +55,8 @@ func CopyObjectSample() {
 	options := []oss.Option{
 		oss.Expires(futureDate),
 		oss.Meta("myprop", "mypropval"),
-		oss.MetadataDirective(oss.MetaReplace)}
+		oss.MetadataDirective(oss.MetaReplace),
+	}
 	_, err = bucket.CopyObject(objectKey, descObjectKey, options...)
 	if err != nil {
 		HandleError(err)
@@ -71,7 +72,8 @@ func CopyObjectSample() {
 	options = []oss.Option{
 		oss.Expires(futureDate),
 		oss.Meta("myprop", "mypropval"),
-		oss.MetadataDirective(oss.MetaReplace)}
+		oss.MetadataDirective(oss.MetaReplace),
+	}
 
 	_, err = bucket.CopyObject(objectKey, objectKey, options...)
 	if err != nil {

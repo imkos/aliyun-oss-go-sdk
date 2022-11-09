@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // DeleteObjectSample shows how to delete single file or multiple files
@@ -15,7 +15,7 @@ func DeleteObjectSample() {
 		HandleError(err)
 	}
 
-	var val = "抽刀断水水更流，举杯销愁愁更愁。 人生在世不称意，明朝散发弄扁舟。"
+	val := "抽刀断水水更流，举杯销愁愁更愁。 人生在世不称意，明朝散发弄扁舟。"
 
 	// Case 1: Delete an object
 	err = bucket.PutObject(objectKey, strings.NewReader(val))

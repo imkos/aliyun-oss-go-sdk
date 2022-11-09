@@ -7,8 +7,8 @@ import (
 	"os"
 
 	kms "github.com/aliyun/alibaba-cloud-sdk-go/services/kms"
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/aliyun/aliyun-oss-go-sdk/oss/crypto"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss/crypto"
 )
 
 func SampleRsaNormalObject() {
@@ -121,7 +121,7 @@ func SampleRsaMultiPartObject() {
 	// The expected number of parts, the actual number of parts is subject to subsequent calculations.
 	expectPartCount := int64(10)
 
-	//Currently aes ctr encryption block size requires 16 byte alignment
+	// Currently aes ctr encryption block size requires 16 byte alignment
 	cryptoContext.PartSize = (fileSize / expectPartCount / 16) * 16
 
 	imur, err := cryptoBucket.InitiateMultipartUpload("<yourObjectName>", &cryptoContext)
@@ -156,8 +156,7 @@ func SampleRsaMultiPartObject() {
 
 // Query the master key according to the master key description information.
 // If you need to decrypt different master key encryption objects, you need to provide this interface.
-type MockRsaManager struct {
-}
+type MockRsaManager struct{}
 
 func (mg *MockRsaManager) GetMasterKey(matDesc map[string]string) ([]string, error) {
 	// to do

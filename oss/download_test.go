@@ -21,6 +21,7 @@ var _ = Suite(&OssDownloadSuite{})
 
 // SetUpSuite runs once when the suite starts running
 func (s *OssDownloadSuite) SetUpSuite(c *C) {
+	bucketName := bucketNamePrefix + RandLowStr(6)
 	if cloudboxControlEndpoint == "" {
 		client, err := New(endpoint, accessID, accessKey)
 		c.Assert(err, IsNil)
@@ -715,6 +716,7 @@ func (s *OssDownloadSuite) TestVersioningDownloadWithoutCheckPoint(c *C) {
 	versioningConfig.Status = string(VersionEnabled)
 	err = client.SetBucketVersioning(bucketName, versioningConfig)
 	c.Assert(err, IsNil)
+	time.Sleep(timeoutInOperation)
 
 	// begin test
 	objectName := objectNamePrefix + RandStr(8)
@@ -858,6 +860,7 @@ func (s *OssDownloadSuite) TestVersioningDownloadWithCheckPoint(c *C) {
 	versioningConfig.Status = string(VersionEnabled)
 	err = client.SetBucketVersioning(bucketName, versioningConfig)
 	c.Assert(err, IsNil)
+	time.Sleep(timeoutInOperation)
 
 	// begin test
 	objectName := objectNamePrefix + RandStr(8)

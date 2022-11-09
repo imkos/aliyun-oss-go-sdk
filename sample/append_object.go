@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // AppendObjectSample shows the append file's usage
@@ -22,7 +22,7 @@ func AppendObjectSample() {
 
 	err = bucket.DeleteObject(objectKey)
 
-	var str = "弃我去者，昨日之日不可留。 乱我心者，今日之日多烦忧！"
+	str := "弃我去者，昨日之日不可留。 乱我心者，今日之日多烦忧！"
 	var nextPos int64
 
 	// Case 1: Append a string to the object
@@ -120,7 +120,8 @@ func AppendObjectSample() {
 	options := []oss.Option{
 		oss.Expires(futureDate),
 		oss.ObjectACL(oss.ACLPublicRead),
-		oss.Meta("myprop", "mypropval")}
+		oss.Meta("myprop", "mypropval"),
+	}
 	nextPos = 0
 	fd.Seek(0, os.SEEK_SET)
 	nextPos, err = bucket.AppendObject(objectKey, strings.NewReader(str), nextPos, options...)

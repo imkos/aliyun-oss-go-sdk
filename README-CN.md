@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/aliyun/aliyun-oss-go-sdk.svg?branch=master)](https://travis-ci.org/aliyun/aliyun-oss-go-sdk)
 [![Coverage Status](https://coveralls.io/repos/github/aliyun/aliyun-oss-go-sdk/badge.svg?branch=master)](https://coveralls.io/github/aliyun/aliyun-oss-go-sdk?branch=master)
 
-## [README in English](https://github.com/aliyun/aliyun-oss-go-sdk/blob/master/README.md)
+## [README in English](https://github.com/imkos/aliyun-oss-go-sdk/blob/master/README.md)
 
 ## 关于
 > - 此Go SDK基于[阿里云对象存储服务](http://www.aliyun.com/product/oss/)官方API构建。
@@ -20,8 +20,8 @@
 
 ## 安装方法
 ### GitHub安装
-> - 执行命令`go get github.com/aliyun/aliyun-oss-go-sdk/oss`获取远程代码包。
-> - 在您的代码中使用`import "github.com/aliyun/aliyun-oss-go-sdk/oss"`引入OSS Go SDK的包。
+> - 执行命令`go get github.com/imkos/aliyun-oss-go-sdk/oss`获取远程代码包。
+> - 在您的代码中使用`import "github.com/imkos/aliyun-oss-go-sdk/oss"`引入OSS Go SDK的包。
 
 ## 快速使用
 #### 获取存储空间列表（List Bucket）
@@ -145,7 +145,7 @@
 
 #### 其它
 更多的示例程序，请参看OSS Go SDK安装路径（即GOPATH变量中的第一个路径）下的`src\github.com\aliyun\aliyun-oss-go-sdk\sample`，该目录下为示例程序，
-或者参看`https://github.com/aliyun/aliyun-oss-go-sdk`下sample目录中的示例文件。
+或者参看`https://github.com/imkos/aliyun-oss-go-sdk`下sample目录中的示例文件。
 
 ## 注意事项
 ### 运行sample

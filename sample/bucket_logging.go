@@ -3,7 +3,7 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // BucketLoggingSample shows how to set, get and delete the bucket logging configuration
@@ -20,7 +20,7 @@ func BucketLoggingSample() {
 		HandleError(err)
 	}
 	// Create target bucket to store the logging files.
-	var targetBucketName = "target-bucket"
+	targetBucketName := "target-bucket"
 	err = client.CreateBucket(targetBucketName)
 	if err != nil {
 		HandleError(err)

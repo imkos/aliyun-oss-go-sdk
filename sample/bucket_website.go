@@ -3,7 +3,7 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // BucketWebsiteSample shows how to set, get and delete the bucket website.
@@ -20,9 +20,9 @@ func BucketWebsiteSample() {
 		HandleError(err)
 	}
 
-	//Define bucket website indexWebsite or errorWebsite
-	var indexWebsite = "myindex.html"
-	var errorWebsite = "myerror.html"
+	// Define bucket website indexWebsite or errorWebsite
+	indexWebsite := "myindex.html"
+	errorWebsite := "myerror.html"
 
 	// Set bucket website indexWebsite or errorWebsite
 	err = client.SetBucketWebsite(bucketName, indexWebsite, errorWebsite)
@@ -40,7 +40,7 @@ func BucketWebsiteSample() {
 			KeyPrefixEquals:             "abc",
 			HTTPErrorCodeReturnedEquals: 404,
 			IncludeHeader: []oss.IncludeHeader{
-				oss.IncludeHeader{
+				{
 					Key:    "host",
 					Equals: "test.oss-cn-beijing-internal.aliyuncs.com",
 				},
@@ -58,7 +58,7 @@ func BucketWebsiteSample() {
 				Pass:    []string{"key1", "key2"},
 				Remove:  []string{"remove1", "remove2"},
 				Set: []oss.MirrorHeaderSet{
-					oss.MirrorHeaderSet{
+					{
 						Key:   "setKey1",
 						Value: "setValue1",
 					},

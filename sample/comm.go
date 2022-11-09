@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 var (
@@ -110,8 +110,10 @@ func DeleteTestBucketAndObject(bucketName string) error {
 			return err
 		}
 		for _, upload := range lmur.Uploads {
-			var imur = oss.InitiateMultipartUploadResult{Bucket: bucket.BucketName,
-				Key: upload.Key, UploadID: upload.UploadID}
+			imur := oss.InitiateMultipartUploadResult{
+				Bucket: bucket.BucketName,
+				Key:    upload.Key, UploadID: upload.UploadID,
+			}
 			err = bucket.AbortMultipartUpload(imur)
 			if err != nil {
 				return err

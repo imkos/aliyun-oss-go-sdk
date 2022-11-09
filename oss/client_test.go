@@ -64,6 +64,8 @@ var (
 
 	// for cloud box ID
 	cloudBoxID = os.Getenv("OSS_TEST_CLOUDBOX_ID")
+
+	kmsID = os.Getenv("OSS_TEST_KMS_ID")
 )
 
 var (

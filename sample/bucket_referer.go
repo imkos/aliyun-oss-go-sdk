@@ -3,7 +3,7 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // BucketRefererSample shows how to set, get and delete the bucket referer.
@@ -20,7 +20,7 @@ func BucketRefererSample() {
 		HandleError(err)
 	}
 
-	var referers = []string{
+	referers := []string{
 		"http://www.aliyun.com",
 		"http://www.???.aliyuncs.com",
 		"http://www.*.com",

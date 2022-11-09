@@ -3,12 +3,12 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // ListObjectsSample shows the file list, including default and specified parameters.
 func ListObjectsSample() {
-	var myObjects = []Object{
+	myObjects := []Object{
 		{"my-object-1", ""},
 		{"my-object-11", ""},
 		{"my-object-2", ""},
@@ -16,7 +16,8 @@ func ListObjectsSample() {
 		{"my-object-22", ""},
 		{"my-object-3", ""},
 		{"my-object-31", ""},
-		{"my-object-32", ""}}
+		{"my-object-32", ""},
+	}
 
 	// Create bucket
 	bucket, err := GetTestBucket(bucketName)
@@ -115,7 +116,8 @@ func ListObjectsSample() {
 		{"fun/movie/001.avi", ""},
 		{"fun/movie/007.avi", ""},
 		{"fun/music/001.mp3", ""},
-		{"fun/music/001.mp3", ""}}
+		{"fun/music/001.mp3", ""},
+	}
 
 	// Create object
 	err = CreateObjects(bucket, myObjects)

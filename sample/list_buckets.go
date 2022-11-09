@@ -3,12 +3,12 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // ListBucketsSample shows the list bucket, including default and specified parameters.
 func ListBucketsSample() {
-	var myBuckets = []string{
+	myBuckets := []string{
 		"my-bucket-1",
 		"my-bucket-11",
 		"my-bucket-2",
@@ -16,7 +16,8 @@ func ListBucketsSample() {
 		"my-bucket-22",
 		"my-bucket-3",
 		"my-bucket-31",
-		"my-bucket-32"}
+		"my-bucket-32",
+	}
 
 	// New client
 	client, err := oss.New(endpoint, accessID, accessKey)
@@ -33,7 +34,7 @@ func ListBucketsSample() {
 	for _, bucket := range lbr.Buckets {
 		err = client.DeleteBucket(bucket.Name)
 		if err != nil {
-			//HandleError(err)
+			// HandleError(err)
 		}
 	}
 

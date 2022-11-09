@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // SignURLSample signs URL sample
@@ -23,7 +23,7 @@ func SignURLSample() {
 		HandleError(err)
 	}
 
-	var val = "花间一壶酒，独酌无相亲。 举杯邀明月，对影成三人。"
+	val := "花间一壶酒，独酌无相亲。 举杯邀明月，对影成三人。"
 	err = bucket.PutObjectWithURL(signedURL, strings.NewReader(val))
 	if err != nil {
 		HandleError(err)

@@ -3,7 +3,7 @@ package sample
 import (
 	"fmt"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // BucketLifecycleSample shows how to set, get and delete bucket's lifecycle.
@@ -30,7 +30,7 @@ func BucketLifecycleSample() {
 		Status:     "Enabled",
 		Expiration: &expriation,
 	}
-	var rules = []oss.LifecycleRule{rule1}
+	rules := []oss.LifecycleRule{rule1}
 	err = client.SetBucketLifecycle(bucketName, rules)
 	if err != nil {
 		HandleError(err)

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/imkos/aliyun-oss-go-sdk/oss"
 )
 
 // ObjectMetaSample shows how to get and set the object metadata
@@ -25,7 +25,8 @@ func ObjectMetaSample() {
 	// Note: Meta is case insensitive
 	options := []oss.Option{
 		oss.Expires(futureDate),
-		oss.Meta("myprop", "mypropval")}
+		oss.Meta("myprop", "mypropval"),
+	}
 	err = bucket.SetObjectMeta(objectKey, options...)
 	if err != nil {
 		HandleError(err)
